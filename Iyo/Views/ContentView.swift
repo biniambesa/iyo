@@ -39,7 +39,12 @@ struct ContentView: View {
         }
         .fab(
             position: addIyoView ? "TOP" : "BOTTOM",
-            fgcolor:.white,color: addIyoView == true ? .red : .blue, image: Image(systemName: addIyoView == true ? "xmark" : "plus"), action: { addIyoView.toggle()})
+            fgcolor:.white,color: addIyoView == true ? .red : .blue, image: Image(systemName: addIyoView == true ? "xmark" : "plus"), action: {
+                withAnimation {
+                    addIyoView.toggle()
+                }
+            }
+        )
     }//:VIEW Body
     
 }

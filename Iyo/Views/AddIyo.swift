@@ -21,6 +21,11 @@ struct AddIyo: View {
     @State var timestamp:Date = Date()
     @State var duedate:Date = Date()
     
+    func fieldsNilValidate()-> Bool{
+        guard self.iyoName.trimmingCharacters(in: .whitespaces) != "" else{return false}
+        guard self.iyoDescription.trimmingCharacters(in: .whitespaces) != "" else{return false}
+        return true
+    }
     var body: some View {
         NavigationView {
             VStack{
@@ -88,8 +93,11 @@ struct AddIyo: View {
                     } //:VStack
                     //                .border(.green)
                     Button(action: {
+                        
+                        //check if task empty or not first
+                        if (self.fieldsNilValidate() == false) {return}
+                        self.addIyoView = false
                         iyoListVM.addIyo(context: viewContext, name: iyoName, description: iyoDescription, isdone: false, importance: importance, income: income ?? 0, expense: expense ?? 0, timestamp: Date(), duedate: Date())
-                        addIyoView.toggle()
                     }, label: {
                         Text("Add Iyo")
                             .frame(minWidth: 40,maxWidth: .infinity)
@@ -110,12 +118,15 @@ struct AddIyo: View {
             //        .border(.purple)
             .toolbar{
                 Button(action: {
-                    addIyoView.toggle()
+                    withAnimation {
+                        addIyoView.toggle()
+                    }
+                    
                 }, label: {
                     Image(systemName: "xmark").foregroundColor(.red)
                 })
             }
-            .navigationTitle("add iyo|task")
+            .navigationTitle("add iyo | task")
             
         }
         .edgesIgnoringSafeArea(.bottom)
