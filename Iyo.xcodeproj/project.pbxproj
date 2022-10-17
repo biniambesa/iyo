@@ -16,6 +16,14 @@
 		2820AA4028FDD2CA00CF2088 /* IyoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA3F28FDD2CA00CF2088 /* IyoTests.swift */; };
 		2820AA4A28FDD2CA00CF2088 /* IyoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA4928FDD2CA00CF2088 /* IyoUITests.swift */; };
 		2820AA4C28FDD2CA00CF2088 /* IyoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA4B28FDD2CA00CF2088 /* IyoUITestsLaunchTests.swift */; };
+		2820AA5B28FDEBD700CF2088 /* IyoListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA5A28FDEBD700CF2088 /* IyoListVM.swift */; };
+		2820AA5D28FDF07700CF2088 /* AddIyo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA5C28FDF07700CF2088 /* AddIyo.swift */; };
+		2820AA6028FDF1EA00CF2088 /* ImportanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA5F28FDF1EA00CF2088 /* ImportanceView.swift */; };
+		2820AA6328FDF27700CF2088 /* Iyo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6228FDF27700CF2088 /* Iyo+Extension.swift */; };
+		2820AA6528FDF95D00CF2088 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6428FDF95D00CF2088 /* Date+Extension.swift */; };
+		2820AA6728FDFD1400CF2088 /* BlankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6628FDFD1400CF2088 /* BlankView.swift */; };
+		2820AA6A28FDFE7900CF2088 /* Fab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6928FDFE7900CF2088 /* Fab.swift */; };
+		2820AA6C28FDFEB700CF2088 /* View_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6B28FDFEB700CF2088 /* View_Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +56,14 @@
 		2820AA4528FDD2CA00CF2088 /* IyoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IyoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2820AA4928FDD2CA00CF2088 /* IyoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IyoUITests.swift; sourceTree = "<group>"; };
 		2820AA4B28FDD2CA00CF2088 /* IyoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IyoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2820AA5A28FDEBD700CF2088 /* IyoListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IyoListVM.swift; sourceTree = "<group>"; };
+		2820AA5C28FDF07700CF2088 /* AddIyo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIyo.swift; sourceTree = "<group>"; };
+		2820AA5F28FDF1EA00CF2088 /* ImportanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportanceView.swift; sourceTree = "<group>"; };
+		2820AA6228FDF27700CF2088 /* Iyo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Iyo+Extension.swift"; sourceTree = "<group>"; };
+		2820AA6428FDF95D00CF2088 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		2820AA6628FDFD1400CF2088 /* BlankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankView.swift; sourceTree = "<group>"; };
+		2820AA6928FDFE7900CF2088 /* Fab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fab.swift; sourceTree = "<group>"; };
+		2820AA6B28FDFEB700CF2088 /* View_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View_Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +114,12 @@
 		2820AA2828FDD2C700CF2088 /* Iyo */ = {
 			isa = PBXGroup;
 			children = (
+				2820AA6828FDFE6B00CF2088 /* Custom Views */,
+				2820AA6128FDF24C00CF2088 /* Extensions */,
+				2820AA5E28FDF1C700CF2088 /* Sub Views */,
+				2820AA5928FDEBAD00CF2088 /* View Models */,
+				2820AA5828FDEB9E00CF2088 /* Views */,
 				2820AA2928FDD2C700CF2088 /* IyoApp.swift */,
-				2820AA2B28FDD2C700CF2088 /* ContentView.swift */,
 				2820AA2D28FDD2CA00CF2088 /* Assets.xcassets */,
 				2820AA3228FDD2CA00CF2088 /* Persistence.swift */,
 				2820AA3428FDD2CA00CF2088 /* Iyo.xcdatamodeld */,
@@ -131,6 +151,50 @@
 				2820AA4B28FDD2CA00CF2088 /* IyoUITestsLaunchTests.swift */,
 			);
 			path = IyoUITests;
+			sourceTree = "<group>";
+		};
+		2820AA5828FDEB9E00CF2088 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2820AA2B28FDD2C700CF2088 /* ContentView.swift */,
+				2820AA5C28FDF07700CF2088 /* AddIyo.swift */,
+				2820AA6628FDFD1400CF2088 /* BlankView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2820AA5928FDEBAD00CF2088 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				2820AA5A28FDEBD700CF2088 /* IyoListVM.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		2820AA5E28FDF1C700CF2088 /* Sub Views */ = {
+			isa = PBXGroup;
+			children = (
+				2820AA5F28FDF1EA00CF2088 /* ImportanceView.swift */,
+			);
+			path = "Sub Views";
+			sourceTree = "<group>";
+		};
+		2820AA6128FDF24C00CF2088 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2820AA6228FDF27700CF2088 /* Iyo+Extension.swift */,
+				2820AA6428FDF95D00CF2088 /* Date+Extension.swift */,
+				2820AA6B28FDFEB700CF2088 /* View_Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2820AA6828FDFE6B00CF2088 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				2820AA6928FDFE7900CF2088 /* Fab.swift */,
+			);
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,10 +327,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2820AA5B28FDEBD700CF2088 /* IyoListVM.swift in Sources */,
+				2820AA6728FDFD1400CF2088 /* BlankView.swift in Sources */,
+				2820AA5D28FDF07700CF2088 /* AddIyo.swift in Sources */,
 				2820AA3328FDD2CA00CF2088 /* Persistence.swift in Sources */,
 				2820AA3628FDD2CA00CF2088 /* Iyo.xcdatamodeld in Sources */,
+				2820AA6A28FDFE7900CF2088 /* Fab.swift in Sources */,
+				2820AA6C28FDFEB700CF2088 /* View_Extension.swift in Sources */,
+				2820AA6028FDF1EA00CF2088 /* ImportanceView.swift in Sources */,
 				2820AA2C28FDD2C700CF2088 /* ContentView.swift in Sources */,
 				2820AA2A28FDD2C700CF2088 /* IyoApp.swift in Sources */,
+				2820AA6328FDF27700CF2088 /* Iyo+Extension.swift in Sources */,
+				2820AA6528FDF95D00CF2088 /* Date+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
