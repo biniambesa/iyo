@@ -13,9 +13,13 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
+        var num = 0
         for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
+            let newItem = Iyo(context: viewContext)
+            
             newItem.timestamp = Date()
+            newItem.task_name = "Iyo #\(num)"
+            num+=0
         }
         do {
             try viewContext.save()

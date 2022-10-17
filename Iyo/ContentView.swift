@@ -8,22 +8,67 @@
 import SwiftUI
 import CoreData
 
+
+class IyoListVM: ObservableObject {
+    @Published var iyos:[Iyo] = []
+    func addIyo(context: NSManagedObjectContext,
+                name:String,
+                description:String,
+                isdone:Bool,
+                importance:Int32,
+                income:Double,
+                expense:Double,
+                timestamp:Date){
+        
+        let iyo = Iyo(context: context)
+        iyo.task_name = name
+        iyo.task_description = description
+        iyo.task_isdone = isdone
+        iyo.task_importance = importance
+        iyo.task_income = income
+        iyo.task_expense = expense
+        iyo.timestamp = timestamp
+    }
+    
+    func save(context: NSManagedObjectContext){
+        do{
+            try context.save()
+        }catch{
+            print("err at #37 iyolistvm, err: \(error)")
+        }
+        
+        loadDataFromCD()
+    }
+    
+    func loadDataFromCD(){
+        //fetch iyolist data from coredata
+        print("fetching data from coredata Iyolistvm #45")
+    }
+}
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Iyo.timestamp, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<Iyo>
 
     var body: some View {
         NavigationView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        VStack{
+                            Text("iyo name at \(item.task_name ?? "")")
+                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        }
+                       
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        VStack{
+                            Text("iyo name at \(item.task_name ?? "")")
+                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        }
+        
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -44,7 +89,7 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
+            let newItem = Iyo(context: viewContext)
             newItem.timestamp = Date()
 
             do {
