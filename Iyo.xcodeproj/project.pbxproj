@@ -24,6 +24,8 @@
 		2820AA6728FDFD1400CF2088 /* BlankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6628FDFD1400CF2088 /* BlankView.swift */; };
 		2820AA6A28FDFE7900CF2088 /* Fab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6928FDFE7900CF2088 /* Fab.swift */; };
 		2820AA6C28FDFEB700CF2088 /* View_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6B28FDFEB700CF2088 /* View_Extension.swift */; };
+		2820AA6E28FE291A00CF2088 /* IyoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6D28FE291A00CF2088 /* IyoCell.swift */; };
+		2820AA7028FE2DE200CF2088 /* CheckBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6F28FE2DE200CF2088 /* CheckBoxStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		2820AA6628FDFD1400CF2088 /* BlankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankView.swift; sourceTree = "<group>"; };
 		2820AA6928FDFE7900CF2088 /* Fab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fab.swift; sourceTree = "<group>"; };
 		2820AA6B28FDFEB700CF2088 /* View_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View_Extension.swift; sourceTree = "<group>"; };
+		2820AA6D28FE291A00CF2088 /* IyoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IyoCell.swift; sourceTree = "<group>"; };
+		2820AA6F28FE2DE200CF2088 /* CheckBoxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				2820AA5F28FDF1EA00CF2088 /* ImportanceView.swift */,
+				2820AA6D28FE291A00CF2088 /* IyoCell.swift */,
 			);
 			path = "Sub Views";
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				2820AA6928FDFE7900CF2088 /* Fab.swift */,
+				2820AA6F28FE2DE200CF2088 /* CheckBoxStyle.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -331,6 +337,7 @@
 				2820AA6728FDFD1400CF2088 /* BlankView.swift in Sources */,
 				2820AA5D28FDF07700CF2088 /* AddIyo.swift in Sources */,
 				2820AA3328FDD2CA00CF2088 /* Persistence.swift in Sources */,
+				2820AA7028FE2DE200CF2088 /* CheckBoxStyle.swift in Sources */,
 				2820AA3628FDD2CA00CF2088 /* Iyo.xcdatamodeld in Sources */,
 				2820AA6A28FDFE7900CF2088 /* Fab.swift in Sources */,
 				2820AA6C28FDFEB700CF2088 /* View_Extension.swift in Sources */,
@@ -338,6 +345,7 @@
 				2820AA2C28FDD2C700CF2088 /* ContentView.swift in Sources */,
 				2820AA2A28FDD2C700CF2088 /* IyoApp.swift in Sources */,
 				2820AA6328FDF27700CF2088 /* Iyo+Extension.swift in Sources */,
+				2820AA6E28FE291A00CF2088 /* IyoCell.swift in Sources */,
 				2820AA6528FDF95D00CF2088 /* Date+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

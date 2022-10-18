@@ -11,10 +11,10 @@ import SwiftUI
 extension Iyo{
     var importance : Importance {
         get {
-            Importance(rawValue: Int(task_importance)) ?? .normal
+            Importance(rawValue: Int(importance_num)) ?? .normal
         }
         set {
-            self.task_importance = Int32(newValue.rawValue)
+            self.importance_num = Int32(newValue.rawValue)
         }
     }
 

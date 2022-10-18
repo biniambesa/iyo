@@ -18,7 +18,7 @@ struct PersistenceController {
             let newItem = Iyo(context: viewContext)
             
             newItem.timestamp = Date()
-            newItem.task_name = "Iyo #\(num)"
+            newItem.name = "Iyo #\(num)"
             num+=0
         }
         do {

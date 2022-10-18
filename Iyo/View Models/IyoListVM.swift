@@ -11,12 +11,10 @@ import CoreData
 
 
 class IyoListVM: ObservableObject {
-    @Published var iyos:[Iyo] = []
     @Published var filterFlag: String = "INCOME"
-    
-    @Environment(\.managedObjectContext) private var viewContext
+    @Published var IyoItem:Iyo!
      
-   
+  
      
     func addIyo(context: NSManagedObjectContext,
                 name:String,
@@ -27,36 +25,30 @@ class IyoListVM: ObservableObject {
                 expense:Double,
                 timestamp:Date,
                 duedate:Date
-    ){
+    )->Void{
         
         let iyo = Iyo(context: context)
-        iyo.task_name = name
-        iyo.task_description = description
-        iyo.task_isdone = isdone
-        iyo.task_importance = Int32(importance.rawValue)
-        iyo.task_income = income
-        iyo.task_expense = expense
-        iyo.task_due_datetime = duedate
+        iyo.name = name
+        iyo.desc = description
+        iyo.is_done = isdone
+        iyo.importance_num = Int32(importance.rawValue)
+        iyo.income = income
+        iyo.expense = expense
+        iyo.due_date = duedate
         iyo.timestamp = timestamp
+        
+        save(context: context)
     }
     
     func save(context: NSManagedObjectContext){
         do{
             try context.save()
-        }catch{
-            print("err at #37 iyolistvm, err: \(error)")
+        }catch let err as NSError{
+            print("err at #37 iyolistvm, err: \(err.localizedDescription), desc \(err.userInfo)")
         }
-        
-        loadDataFromCD()
+    
     }
     
-    func loadDataFromCD(){
-        //fetch iyolist data from coredata
-        print("fetching data from coredata Iyolistvm #45")
-        
-        @FetchRequest(entity: Iyo.entity(), sortDescriptors: [NSSortDescriptor(key: "timestamp", ascending: true)]) var fetchedIyo:FetchedResults<Iyo>
-        iyos = fetchedIyo.map{$0}
-    }
     
 //    func editIyo(iyo:Iyo, index: Int){
 //           taskListItem = task
@@ -71,7 +63,7 @@ class IyoListVM: ObservableObject {
        
        
        func isDone(iyo:Iyo, context:NSManagedObjectContext){
-           iyo.task_isdone.toggle()
+           iyo.is_done.toggle()
            save(context: context)
        }
 }

@@ -16,8 +16,8 @@ struct AddIyo: View {
     @State var iyoDescription:String = ""
     @State var isdone:Bool = false
     @State var importance: Importance = .normal
-    @State var income:Double?
-    @State var expense:Double?
+    @State var income:Double? = 0
+    @State var expense:Double? = 0
     @State var timestamp:Date = Date()
     @State var duedate:Date = Date()
     
@@ -26,6 +26,11 @@ struct AddIyo: View {
         guard self.iyoDescription.trimmingCharacters(in: .whitespaces) != "" else{return false}
         return true
     }
+    let formatter: NumberFormatter = {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            return formatter
+        }()
     var body: some View {
         NavigationView {
             VStack{
@@ -49,12 +54,14 @@ struct AddIyo: View {
                             .padding(.leading)
                         ){
                             HStack{
-                                TextField("income",value:  $income, formatter: NumberFormatter()).padding()
+                                TextField("income",value:  $income, formatter: formatter).padding()
                                     .background(Color(.systemGray6))
                                     .cornerRadius(4)
-                                TextField("expense", value: $expense, formatter: NumberFormatter()).padding()
+                                    .keyboardType(.numberPad)
+                                TextField("expense", value: $expense, formatter: formatter).padding()
                                     .background(Color(.systemGray6))
                                     .cornerRadius(4)
+                                    .keyboardType(.numberPad)
                             } //:HStack
                         } // :HStack
                         Section(header: Text("Importance")

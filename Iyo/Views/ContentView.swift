@@ -8,23 +8,18 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var iyoListVM:IyoListVM
+    
+    @FetchRequest(entity: Iyo.entity(), sortDescriptors: [NSSortDescriptor(key: "timestamp", ascending: true)]) var fetchedIyos:FetchedResults<Iyo>
+    
     @State private var addIyoView = false
+    
+    
     var body: some View {
         NavigationView {
             ZStack{
                 List {
-                    ForEach(iyoListVM.iyos) { item in
-                        NavigationLink {
-                            VStack{
-                                Text("iyo name at \(item.task_name ?? "")")
-                                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                            }
-                        } label: {
-                            VStack{
-                                Text("iyo name at \(item.task_name ?? "")")
-                                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                            }
-                        }
+                    ForEach(fetchedIyos) { item in
+                        IyoCell(iyoItem: item)
                     }
                 } // :List
                 if self.addIyoView {
@@ -45,6 +40,9 @@ struct ContentView: View {
                 }
             }
         )
+        .onAppear{
+//            iyoListVM.loadDataFromCD()
+        }
     }//:VIEW Body
     
 }
