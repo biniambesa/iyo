@@ -48,7 +48,11 @@ class IyoListVM: ObservableObject {
         }
     
     }
-    
+    func update(context: NSManagedObjectContext){
+        if context.hasChanges{
+            save(context: context)
+        }
+    }
     
 //    func editIyo(iyo:Iyo, index: Int){
 //           taskListItem = task
