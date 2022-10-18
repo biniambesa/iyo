@@ -114,7 +114,7 @@ struct AddIyo: View {
                         //check if task empty or not first
                         if (self.fieldsNilValidate() == false) {return}
                         self.addIyoView = false
-                        iyoListVM.addIyo(context: viewContext, name: iyoName, description: iyoDescription, isdone: false, importance: importance, income: Double(income.value) ?? 0, expense: Double(expense.value) ?? 0, timestamp: Date(), duedate: Date())
+                        iyoListVM.addIyo(context: viewContext,id:UUID(), name: iyoName, description: iyoDescription, isdone: false, importance: importance, income: Double(income.value) ?? 0, expense: Double(expense.value) ?? 0, timestamp: Date(), duedate: Date())
                     }, label: {
                         Text("Add Iyo")
                             .frame(minWidth: 40,maxWidth: .infinity)
@@ -143,7 +143,7 @@ struct AddIyo: View {
                     Image(systemName: "xmark").foregroundColor(.red)
                 })
             }
-            .navigationTitle("add iyo | task")
+            .navigationTitle("Add Iyo")
             
         }
         .edgesIgnoringSafeArea(.bottom)

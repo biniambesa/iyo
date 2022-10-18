@@ -11,9 +11,19 @@ struct ContentView: View {
     
     @FetchRequest(entity: Iyo.entity(), sortDescriptors: [NSSortDescriptor(key: "timestamp", ascending: true)]) var fetchedIyos:FetchedResults<Iyo>
     
+    @FetchRequest(entity: DailyGratitude.entity(), sortDescriptors: [NSSortDescriptor(key: "timestamp", ascending: true)]) var fetchedDailyG:FetchedResults<DailyGratitude>
+    
     @State private var addIyoView = false
+    @State private var addGInputView = false
     
     
+    func fabTopOrBottom()->String{
+        if(addIyoView == true || addGInputView == true){
+            return "TOP"
+        }else{
+            return "BOTTOM"
+        }
+    }
     var body: some View {
         NavigationView {
             ZStack{
@@ -30,13 +40,20 @@ struct ContentView: View {
                         .transition(.move(edge: .bottom))
 //                        .animation(.default, value: self.addIyoView)
                 }
+                
+                if self.addGInputView {
+                    //show add task view
+                    AddDailyGratitude(addGView: self.$addGInputView)
+                        .transition(.move(edge: .bottom))
+//                        .animation(.default, value: self.addIyoView)
+                }
             }//:ZStack
     
         }
         .fab(
-            position: addIyoView ? "TOP" : "BOTTOM",
+            position: fabTopOrBottom(),
             fgcolor:.white,color: addIyoView == true ? .red : .blue, image: Image(systemName: addIyoView == true ? "xmark" : "plus"), action: {
-                withAnimation (.easeIn(duration: 0.5)){
+                withAnimation (.easeIn(duration: 0.25)){
                     addIyoView.toggle()
                 }
             }
@@ -44,6 +61,15 @@ struct ContentView: View {
         .navigationTitle("Iyos")
         .onAppear{
 //            iyoListVM.loadDataFromCD()
+            guard let lastGInput = fetchedDailyG.first else{
+                print("no gs saved, make some now")
+                withAnimation{addGInputView.toggle()}
+                return
+            }
+          let timeSinceLastGinput = iyoListVM.calcDailyGratitudeReset(lastInput:lastGInput.timestamp ?? Date())
+            if(timeSinceLastGinput > 24){
+                withAnimation{addGInputView.toggle()}
+            }
         }
     }//:VIEW Body
     

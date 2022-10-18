@@ -26,6 +26,7 @@
 		2820AA6C28FDFEB700CF2088 /* View_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6B28FDFEB700CF2088 /* View_Extension.swift */; };
 		2820AA6E28FE291A00CF2088 /* IyoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6D28FE291A00CF2088 /* IyoCell.swift */; };
 		2820AA7028FE2DE200CF2088 /* CheckBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA6F28FE2DE200CF2088 /* CheckBoxStyle.swift */; };
+		2820AA7228FECEE000CF2088 /* AddDailyGratitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2820AA7128FECEE000CF2088 /* AddDailyGratitude.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		2820AA6B28FDFEB700CF2088 /* View_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View_Extension.swift; sourceTree = "<group>"; };
 		2820AA6D28FE291A00CF2088 /* IyoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IyoCell.swift; sourceTree = "<group>"; };
 		2820AA6F28FE2DE200CF2088 /* CheckBoxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxStyle.swift; sourceTree = "<group>"; };
+		2820AA7128FECEE000CF2088 /* AddDailyGratitude.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDailyGratitude.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				2820AA2B28FDD2C700CF2088 /* ContentView.swift */,
 				2820AA5C28FDF07700CF2088 /* AddIyo.swift */,
 				2820AA6628FDFD1400CF2088 /* BlankView.swift */,
+				2820AA7128FECEE000CF2088 /* AddDailyGratitude.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				2820AA2A28FDD2C700CF2088 /* IyoApp.swift in Sources */,
 				2820AA6328FDF27700CF2088 /* Iyo+Extension.swift in Sources */,
 				2820AA6E28FE291A00CF2088 /* IyoCell.swift in Sources */,
+				2820AA7228FECEE000CF2088 /* AddDailyGratitude.swift in Sources */,
 				2820AA6528FDF95D00CF2088 /* Date+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

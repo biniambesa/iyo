@@ -13,10 +13,19 @@ import Combine
 class IyoListVM: ObservableObject {
     @Published var filterFlag: String = "INCOME"
     @Published var IyoItem:Iyo!
-     
+    @Published var gLastNoted:Date = Date()
+
+    func calcDailyGratitudeReset(lastInput: Date) -> Int{
+        let diffComponents = Calendar.current.dateComponents([.hour], from: lastInput, to: Date())
+        let hours = diffComponents.hour
+        print("last gratitude posted on \(hours ?? 0) ago")
+        
+        return hours ?? 0
+    }
   
      
     func addIyo(context: NSManagedObjectContext,
+                id:UUID,
                 name:String,
                 description:String,
                 isdone:Bool,
@@ -28,6 +37,7 @@ class IyoListVM: ObservableObject {
     )->Void{
         
         let iyo = Iyo(context: context)
+        iyo.id = id
         iyo.name = name
         iyo.desc = description
         iyo.is_done = isdone
