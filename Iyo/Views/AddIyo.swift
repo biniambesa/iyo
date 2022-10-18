@@ -7,7 +7,17 @@
 
 import Foundation
 import SwiftUI
-
+class NumberInput: ObservableObject {
+    @Published var value = "" {
+        didSet {
+            let filtered = value.filter { $0.isNumber }
+            
+            if value != filtered {
+                value = filtered
+            }
+        }
+    }
+}
 struct AddIyo: View {
     @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject var iyoListVM:IyoListVM
@@ -16,8 +26,8 @@ struct AddIyo: View {
     @State var iyoDescription:String = ""
     @State var isdone:Bool = false
     @State var importance: Importance = .normal
-    @State var income:Double? = 0
-    @State var expense:Double? = 0
+    @State var income = NumberInput()
+    @State var expense = NumberInput()
     @State var timestamp:Date = Date()
     @State var duedate:Date = Date()
     
@@ -54,11 +64,11 @@ struct AddIyo: View {
                             .padding(.leading)
                         ){
                             HStack{
-                                TextField("income",value:  $income, formatter: formatter).padding()
+                                TextField("income",text:  $income.value).padding()
                                     .background(Color(.systemGray6))
                                     .cornerRadius(4)
                                     .keyboardType(.numberPad)
-                                TextField("expense", value: $expense, formatter: formatter).padding()
+                                TextField("expense", text: $expense.value).padding()
                                     .background(Color(.systemGray6))
                                     .cornerRadius(4)
                                     .keyboardType(.numberPad)
@@ -104,7 +114,7 @@ struct AddIyo: View {
                         //check if task empty or not first
                         if (self.fieldsNilValidate() == false) {return}
                         self.addIyoView = false
-                        iyoListVM.addIyo(context: viewContext, name: iyoName, description: iyoDescription, isdone: false, importance: importance, income: income ?? 0, expense: expense ?? 0, timestamp: Date(), duedate: Date())
+                        iyoListVM.addIyo(context: viewContext, name: iyoName, description: iyoDescription, isdone: false, importance: importance, income: Double(income.value) ?? 0, expense: Double(expense.value) ?? 0, timestamp: Date(), duedate: Date())
                     }, label: {
                         Text("Add Iyo")
                             .frame(minWidth: 40,maxWidth: .infinity)

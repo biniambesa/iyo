@@ -21,25 +21,27 @@ struct ContentView: View {
                     ForEach(fetchedIyos) { item in
                         IyoCell(iyoItem: item)
                     }
+                }.refreshable {
+                    print("Do your refresh work here")
                 } // :List
                 if self.addIyoView {
-                    BlackView()
-                        .onTapGesture { self.addIyoView = false}
                     //show add task view
                     AddIyo(addIyoView: self.$addIyoView)
                         .transition(.move(edge: .bottom))
-                        .animation(.default, value: self.addIyoView)
+//                        .animation(.default, value: self.addIyoView)
                 }
             }//:ZStack
+    
         }
         .fab(
             position: addIyoView ? "TOP" : "BOTTOM",
             fgcolor:.white,color: addIyoView == true ? .red : .blue, image: Image(systemName: addIyoView == true ? "xmark" : "plus"), action: {
-                withAnimation {
+                withAnimation (.easeIn(duration: 0.5)){
                     addIyoView.toggle()
                 }
             }
         )
+        .navigationTitle("Iyos")
         .onAppear{
 //            iyoListVM.loadDataFromCD()
         }

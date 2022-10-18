@@ -7,13 +7,15 @@
 
 import Foundation
 import SwiftUI
+import CoreData
+
 
 struct IyoCell: View {
     @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject var iyoListVM:IyoListVM
     @ObservedObject var iyoItem:Iyo
-    
     @State private var isEdit = false
+    @State private var fullDateShow = false
     
     
     var body:some View{
@@ -27,9 +29,26 @@ struct IyoCell: View {
                     Spacer()
                     HStack{
                         Text("due:").font(.caption).fontWeight(.bold)
-                        Text(iyoItem.due_date!,style: .date).font(.caption).fontWeight(.bold)
-                            .strikethrough(self.iyoItem.is_done, color: self.iyoItem.importance.importanceColor())
+                        
+                        if(fullDateShow){
+                            Text("\(iyoItem.due_date!.formatted(.dateTime.month().day().hour().minute()))")
+                                .font(.caption)
+                                .foregroundColor(self.iyoItem.importance.importanceColor())
+                                .strikethrough(self.iyoItem.is_done, color: self.iyoItem.importance.importanceColor())
+                        }else{
+                            Text((iyoItem.due_date == nil ? "": iyoItem.due_date!.getRemTime()))
+                                .foregroundColor(self.iyoItem.importance.importanceColor())
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .strikethrough(self.iyoItem.is_done, color: self.iyoItem.importance.importanceColor())
+                        }
+                            
                     }//:HStack due date
+                    .onTapGesture {
+                        withAnimation {
+                            fullDateShow.toggle()
+                        }
+                    }
                    
                 } //:HStack
                 HStack{
@@ -40,12 +59,25 @@ struct IyoCell: View {
                         .font(.caption).fontWeight(.bold)
                         .strikethrough(self.iyoItem.is_done, color: self.iyoItem.importance.importanceColor())
                     Spacer()
-
-                    Text((iyoItem.due_date?.getRemTime())!)
-                        .foregroundColor(self.iyoItem.importance.importanceColor())
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .strikethrough(self.iyoItem.is_done, color: self.iyoItem.importance.importanceColor())
+                    
+                    HStack{
+                        Text("\(iyoItem.income.formatted(.currency(code: "USD")))")
+                            .fontWeight(.light)
+                            .foregroundColor(.green)
+                            .strikethrough(self.iyoItem.is_done, color: self.iyoItem.importance.importanceColor())
+                            .opacity(self.iyoItem.is_done ? 0.5 : 1)
+                            .font(.caption).fontWeight(.bold)
+                        
+                      
+                        Text("\(iyoItem.expense.formatted(.currency(code: "USD")))")
+                            .fontWeight(.light)
+                            .foregroundColor(.red)
+                            .strikethrough(self.iyoItem.is_done, color: self.iyoItem.importance.importanceColor())
+                            .opacity(self.iyoItem.is_done ? 0.5 : 1)
+                            .font(.caption).fontWeight(.bold)
+                            
+                    }
+                    
                     
                 }
             }  .swipeActions(edge: .trailing, allowsFullSwipe: false){
