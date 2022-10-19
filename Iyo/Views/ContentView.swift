@@ -25,6 +25,7 @@ struct ContentView: View {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
             self.now = Date()
         }
+        
     }
     func fabTopOrBottom()->String{
         if(addIyoView == true || addGInputView == true){
@@ -33,16 +34,29 @@ struct ContentView: View {
             return "BOTTOM"
         }
     }
+    func resetGView(){
+        guard let lastGInput = fetchedDailyG.last else{
+            print("no gs saved, make some now")
+            withAnimation{addGInputView.toggle()}
+            return
+        }
+        lastGrtdtime = lastGInput.timestamp ?? Date();
+        self.timeSinceLastGinput = iyoListVM.calcDailyGratitudeReset(lastInput:lastGInput.timestamp ?? Date())
+        if(timeSinceLastGinput > 24){
+            print("time since last g \(timeSinceLastGinput) hrs ago \(addGInputView)")
+            withAnimation{addGInputView.toggle()}
+        }
+    }
     var body: some View {
         NavigationView {
             VStack{
-                Text("🙏🏽 \(iyoListVM.timerString(from: now, until:lastGrtdtime)) 🙏🏽")
-                    .font(.largeTitle)
-                    .foregroundColor(.blue)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 5)
-                    .background(.white.opacity(0.75))
-                    .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                if(addGInputView==false){Text("🙏🏽 \(iyoListVM.timerString(from: now, until:lastGrtdtime)) 🙏🏽")
+                        .font(.largeTitle)
+                        .foregroundColor(.blue)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 5)
+                        .background(.white.opacity(0.75))
+                    .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))}
                 ZStack{
                     List {
                         ForEach(fetchedIyos.filter{
@@ -70,7 +84,7 @@ struct ContentView: View {
                         //                        .animation(.default, value: self.addIyoView)
                     }
                 } //:ZStack
-                if(addIyoView == false){
+                if(addIyoView == false && addGInputView == false){
                     HStack(alignment: .center){
                         ImportanceView(importanceTitle: "All", selectedImprtance: self.$importance
                         ).onTapGesture {
@@ -113,17 +127,8 @@ struct ContentView: View {
         .onAppear{
             //            iyoListVM.loadDataFromCD()
             print("AM I USING TOO MUCH ENERGY")
-            guard let lastGInput = fetchedDailyG.first else{
-                print("no gs saved, make some now")
-                withAnimation{addGInputView.toggle()}
-                return
-            }
-            lastGrtdtime = lastGInput.timestamp ?? Date();
-            self.timeSinceLastGinput = iyoListVM.calcDailyGratitudeReset(lastInput:lastGInput.timestamp ?? Date())
-            if(timeSinceLastGinput > 24){
-                withAnimation{addGInputView.toggle()}
-            }
             let _ = self.timer
+            resetGView()
         }
     }//:VIEW Body
     
