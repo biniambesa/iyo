@@ -15,8 +15,17 @@ struct ContentView: View {
     
     @State private var addIyoView = false
     @State private var addGInputView = false
+    @State var importance: Importance = .all
+    @State var timeSinceLastGinput = 0
+    @State var lastGrtdtime: Date = Date()
+    @State var now: Date = Date()
+    @State var filterBy: Importance = .all
     
-    
+    var timer: Timer {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
+            self.now = Date()
+        }
+    }
     func fabTopOrBottom()->String{
         if(addIyoView == true || addGInputView == true){
             return "TOP"
@@ -26,29 +35,71 @@ struct ContentView: View {
     }
     var body: some View {
         NavigationView {
-            ZStack{
-                List {
-                    ForEach(fetchedIyos) { item in
-                        IyoCell(iyoItem: item)
+            VStack{
+                Text("🙏🏽 \(iyoListVM.timerString(from: now, until:lastGrtdtime)) 🙏🏽")
+                    .font(.largeTitle)
+                    .foregroundColor(.blue)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 5)
+                    .background(.white.opacity(0.75))
+                    .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                ZStack{
+                    List {
+                        ForEach(fetchedIyos.filter{
+                            filterBy == .all ? true :
+                            $0.importance == filterBy
+                            
+                        }) { item in
+                            
+                            IyoCell(iyoItem: item)
+                        }
+                    }.refreshable {
+                        print("Do your refresh work here")
+                    } // :List
+                    if self.addIyoView {
+                        //show add task view
+                        AddIyo(addIyoView: self.$addIyoView)
+                            .transition(.move(edge: .bottom))
+                        //                        .animation(.default, value: self.addIyoView)
                     }
-                }.refreshable {
-                    print("Do your refresh work here")
-                } // :List
-                if self.addIyoView {
-                    //show add task view
-                    AddIyo(addIyoView: self.$addIyoView)
-                        .transition(.move(edge: .bottom))
-//                        .animation(.default, value: self.addIyoView)
+                    
+                    if self.addGInputView {
+                        //show add task view
+                        AddDailyGratitude(addGView: self.$addGInputView)
+                            .transition(.move(edge: .bottom))
+                        //                        .animation(.default, value: self.addIyoView)
+                    }
+                } //:ZStack
+                if(addIyoView == false){
+                    HStack(alignment: .center){
+                        ImportanceView(importanceTitle: "All", selectedImprtance: self.$importance
+                        ).onTapGesture {
+                            self.filterBy = .all
+                            self.importance = .all
+                        }//:ImportanceView low
+                        ImportanceView(importanceTitle: "Low", selectedImprtance: self.$importance
+                        ).onTapGesture {
+                            self.filterBy = .low
+                            self.importance = .low
+                        }//:ImportanceView low
+                        
+                        ImportanceView(importanceTitle: "Normal", selectedImprtance: self.$importance
+                        ).onTapGesture {
+                            self.filterBy = .normal
+                            self.importance = .normal
+                        }//:ImportanceView normal
+                        
+                        ImportanceView(importanceTitle: "High", selectedImprtance: self.$importance
+                        ).onTapGesture {
+                            self.filterBy = .high
+                            self.importance = .high
+                        } //:ImportanceView high
+                    } //:HStack
+                    .padding()
                 }
-                
-                if self.addGInputView {
-                    //show add task view
-                    AddDailyGratitude(addGView: self.$addGInputView)
-                        .transition(.move(edge: .bottom))
-//                        .animation(.default, value: self.addIyoView)
-                }
-            }//:ZStack
-    
+            } //:VStack
+            
+            
         }
         .fab(
             position: fabTopOrBottom(),
@@ -60,16 +111,19 @@ struct ContentView: View {
         )
         .navigationTitle("Iyos")
         .onAppear{
-//            iyoListVM.loadDataFromCD()
+            //            iyoListVM.loadDataFromCD()
+            print("AM I USING TOO MUCH ENERGY")
             guard let lastGInput = fetchedDailyG.first else{
                 print("no gs saved, make some now")
                 withAnimation{addGInputView.toggle()}
                 return
             }
-          let timeSinceLastGinput = iyoListVM.calcDailyGratitudeReset(lastInput:lastGInput.timestamp ?? Date())
+            lastGrtdtime = lastGInput.timestamp ?? Date();
+            self.timeSinceLastGinput = iyoListVM.calcDailyGratitudeReset(lastInput:lastGInput.timestamp ?? Date())
             if(timeSinceLastGinput > 24){
                 withAnimation{addGInputView.toggle()}
             }
+            let _ = self.timer
         }
     }//:VIEW Body
     

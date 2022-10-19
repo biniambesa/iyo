@@ -17,7 +17,7 @@ struct FAB<ImageView: View>: ViewModifier {
     
     
     private let size: CGFloat = 60
-    private let margin: CGFloat = 15
+    private let margin: CGFloat = 100
     
     func body(content: Content) -> some View {
         GeometryReader { geo in
@@ -39,7 +39,7 @@ struct FAB<ImageView: View>: ViewModifier {
             .foregroundColor(fgColor)
             .shadow(color: .gray, radius: 2, x: 1, y: 1)
             .onTapGesture(perform: action)
-            .offset(x: (geo.size.width - size) / 2 - margin,
+            .offset(x: (geo.size.width - size) / 2 - 15,
                     y: (position == "TOP" ? top : bottom))
     }
 }

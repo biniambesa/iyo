@@ -24,12 +24,14 @@ enum Importance : Int{
     case low = 0
     case normal = 1
     case high = 2
+    case all = 4
 
     var importanceType:String{
         switch rawValue {
         case Importance.low.rawValue : return "low"
         case Importance.normal.rawValue : return "normal"
         case Importance.high.rawValue : return "high"
+        case Importance.all.rawValue : return "all"
         default: return ""
         }
     }
@@ -39,6 +41,7 @@ enum Importance : Int{
         case Importance.low.rawValue : return .green
         case Importance.normal.rawValue : return .orange
         case Importance.high.rawValue : return .red
+        case Importance.all.rawValue : return .blue
         default: return .white
         }
     }

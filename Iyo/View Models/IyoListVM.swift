@@ -14,7 +14,21 @@ class IyoListVM: ObservableObject {
     @Published var filterFlag: String = "INCOME"
     @Published var IyoItem:Iyo!
     @Published var gLastNoted:Date = Date()
-
+    @Published var sortType : Importance = .all
+    @Published var iyos:[Iyo]=[]
+    func timerString(from date: Date, until nowDate: Date) -> String {
+            let calendar = Calendar(identifier: .gregorian)
+            let components = calendar
+                .dateComponents([.day, .hour, .minute, .second]
+                    ,from: nowDate,
+                     to: date)
+            return String(format: "%02dd:%02dh:%02d:%02ds",
+                          components.day ?? 0,
+                          components.hour ?? 0,
+                          components.minute ?? 0,
+                          components.second ?? 0)
+    }
+    
     func calcDailyGratitudeReset(lastInput: Date) -> Int{
         let diffComponents = Calendar.current.dateComponents([.hour], from: lastInput, to: Date())
         let hours = diffComponents.hour
@@ -80,5 +94,7 @@ class IyoListVM: ObservableObject {
            iyo.is_done.toggle()
            save(context: context)
        }
+    
+ 
 }
 
